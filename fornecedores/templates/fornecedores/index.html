@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Fornecedores - Supermercado J/A</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 20px;
+        }
+
+        h1 {
+            color: #000000;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #000000;
+            color: #fff;
+            border-bottom: none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .card-title {
+            text-decoration: none;
+            margin-bottom: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-primary {
+            font-weight: 700;
+            width: 100%;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Sistema de Gestão de Fornecedores - Supermercado J/A</h1>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Lista de Fornecedores</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Visualize e gerencie a lista de fornecedores cadastrados.</p>
+                        <a href="{% url 'fornecedores:lista_fornecedores'%}" class="btn btn-primary">Ver Fornecedores</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Adicionar Fornecedor</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Adicione um novo fornecedor ao sistema.</p>
+                        <a href="{% url 'fornecedores:adicionar_fornecedor'%}" class="btn btn-primary">Adicionar Fornecedor</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
