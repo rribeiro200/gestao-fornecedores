@@ -41,7 +41,7 @@ class Fornecedor(models.Model):
     nome = models.CharField(max_length=255)
     cidade = models.CharField(max_length=255)
     estado = models.CharField(max_length=2, choices=ESTADOS) # type:ignore
-    cep = models.CharField(max_length=9)
+    cep = models.CharField(max_length=15)
     contato = models.CharField(max_length=20, null=True, blank=True)  # Alterado para CharField e permitido nulo
     email = models.EmailField(null=True, blank=True)  # Permitido nulo
     tipo = models.CharField(max_length=4, choices=TIPO_CONTATO, null=True, blank=True)
