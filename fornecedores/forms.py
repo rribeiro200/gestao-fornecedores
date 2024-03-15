@@ -16,8 +16,6 @@ class FornecedorForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
-        self._my_errors = defaultdict(list)
-
     class Meta:
         model = Fornecedor
         fields = ('nome', 'cidade', 'estado', 'cep', 'contato', 'email', 'tipo',)
@@ -26,7 +24,7 @@ class FornecedorForm(forms.ModelForm):
             'cidade': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cidade'}),
             'estado': Select2Widget(attrs={'class': 'form-select'}),
             'cep': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'CEP'}),
-            'contato': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Contato'}),
+            'contato': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'DDD...'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'E-mail'}),
             'tipo': Select2Widget(attrs={'class': 'form-select'}),
         }

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Fornecedor
+from produtos.models import Produto
 from .forms import FornecedorForm
 from django.contrib import messages
 
@@ -20,9 +21,20 @@ def lista_fornecedores(request):
     return render(request, 'fornecedores/lista_fornecedores.html', ctx)
 
 
+def detalhes_fornecedor(request, pk):
+    fornecedor = Fornecedor.objects.filter(id_fornecedor=pk).first()
+    produto_fornecedor = Produto.objects.filter(fornecedor_FK=fornecedor)
+    print('Fornecedor:          ', fornecedor)
+    print('Produtos do Fornecedor:          ', produto_fornecedor)
+    
+    ctx = {'fornecedor': fornecedor, 'produto_fornecedor': produto_fornecedor}
+    return render(request, 'fornecedores/detalhes_fornecedor.html', ctx)
+
+
 def adicionar_fornecedor(request):
     if request.method == "POST":
         form = FornecedorForm(request.POST)
+        
         if form.is_valid():
             try:
                 form.save()

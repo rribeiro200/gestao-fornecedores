@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Fornecedor - Supermercado J/A</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #212529;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            border-bottom: none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .card-title {
+            text-decoration: none;
+            margin-bottom: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .btn-primary,
+        .btn-success,
+        .btn-danger {
+            font-weight: 700;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+        }
+
+        .produtos-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .produto-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Detalhes do Fornecedor - Supermercado J/A</h1>
+
+        <!--FEEDBACK-->
+        {% if messages %}
+        {% for message in messages %}
+        <div id="feedback"
+            class="mb-3 {% if message.tags == 'error' %}error{% elif message.tags == 'success' %}success{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- Cards com informações dos fornecedores -->
+        <div class="container">
+            {% if fornecedor %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{ fornecedor.nome }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
+                    <p class="card-text"><strong>Estado:</strong> {{ fornecedor.estado }}</p>
+                    <p class="card-text"><strong>CEP:</strong> {{ fornecedor.cep }}</p>
+                    <p class="card-text"><strong>Contato:</strong> {{ fornecedor.contato }}</p>
+                    <p class="card-text"><strong>E-mail:</strong> {{ fornecedor.email }}</p>
+                    <p class="card-text"><strong>Tipo:</strong> {{ fornecedor.tipo }}</p>
+                    <!-- Produtos fornecidos pelo fornecedor -->
+                    {% if not produto_fornecedor %}
+                        Este fornecedor não possui produtos. Adicione um produto à este fornecedor.
+                    {% else %}
+                        <div class="produtos-box">
+                        <h5>Produtos Fornecidos:</h5>
+                        
+                            {% for produto in produto_fornecedor %}
+                            <div class="produto-item">{{ produto.nome }}</div>
+                            <div class="produto-item">{{ produto.descricao }}</div>
+                            <div class="produto-item">{{ produto.preco }}</div>
+                            <div class="produto-item">{{ produto.data_entrada }}</div>
+                            <div class="produto-item">{{ produto.data_validade }}</div>
+                            {% endfor %}
+                            
+                            </div>
+                        </div>
+                    {% endif %}
+                <!-- Botões para ações relacionadas ao fornecedor -->
+                <div class="card-footer d-grid gap-2 gap-md-0">
+                    <button class="btn btn-primary" type="button">Editar</button>
+                    <a href="{% url 'fornecedores:detalhes_fornecedor' fornecedor.id_fornecedor %}" class="btn btn-primary" role="button">Detalhes</a>
+                    <a href="{% url 'produtos:novo_produto' fornecedor.pk %}" class="btn btn-success mt-2 mt-md-0" role="button">Adicionar Produto</a>
+                    <button class="btn btn-danger mt-2 mt-md-0" type="button">Excluir</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

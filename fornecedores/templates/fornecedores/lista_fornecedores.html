@@ -70,30 +70,28 @@
         <h1>Lista de Fornecedores - Supermercado J/A</h1>
 
         <!-- Cards com informações dos fornecedores -->
-        {% for fornecedor in fornecedores %}
         <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for fornecedor in fornecedores %}
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">{{fornecedor.nome}}</h5>
+                        <h5 class="card-title">{{ fornecedor.nome }}</h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">{{fornecedor.cidade}}</p><p class="card-text">{{fornecedor.estado}}</p><p class="card-text">{{fornecedor.cep}}</p>
-                        <p class="card-text">{{fornecedor.contato}}</p>
-                        <p class="card-text">{{fornecedor.email}}</p>
-                        <p class="card-text">{{fornecedor.tipo}}</p>
+                        <p class="card-text"><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
+                        <p class="card-text"><strong>Contato:</strong> {{ fornecedor.contato }}</p>
+                        <p class="card-text"><strong>E-mail:</strong> {{ fornecedor.email }}</p>
                         <!-- Botões para ações relacionadas ao fornecedor -->
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="button">Editar</button>
+                            <a href="{% url 'fornecedores:detalhes_fornecedor' fornecedor.id_fornecedor %}" class="btn btn-primary" role="button">Detalhes</a>
                             <button class="btn btn-danger mt-2" type="button">Excluir</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Adicione mais cards conforme necessário -->
+            {% endfor %}
         </div>
-        {% endfor %}
-
     </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
