@@ -90,6 +90,14 @@
         .produto-item {
             margin-bottom: 10px;
         }
+
+        /* Estilos para os itens do produto */
+        .produto-item {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
     </style>
 </head>
 
@@ -127,22 +135,21 @@
                         Este fornecedor não possui produtos. Adicione um produto à este fornecedor.
                     {% else %}
                         <div class="produtos-box">
-                        <h5>Produtos Fornecidos:</h5>
-                        
+                            <h5>Produtos Fornecidos:</h5>
                             {% for produto in produto_fornecedor %}
-                            <div class="produto-item">{{ produto.nome }}</div>
-                            <div class="produto-item">{{ produto.descricao }}</div>
-                            <div class="produto-item">{{ produto.preco }}</div>
-                            <div class="produto-item">{{ produto.data_entrada }}</div>
-                            <div class="produto-item">{{ produto.data_validade }}</div>
-                            {% endfor %}
-                            
+                            <div class="produto-item">
+                                <p><strong>Nome:</strong> {{ produto.nome }}</p>
+                                <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+                                <p><strong>Preço:</strong> {{ produto.preco }}</p>
+                                <p><strong>Data de Entrada:</strong> {{ produto.data_entrada }}</p>
+                                <p><strong>Data de Validade:</strong> {{ produto.data_validade }}</p>
                             </div>
+                            {% endfor %}
                         </div>
                     {% endif %}
                 <!-- Botões para ações relacionadas ao fornecedor -->
                 <div class="card-footer d-grid gap-2 gap-md-0">
-                    <button class="btn btn-primary" type="button">Editar</button>
+                    <a href="{% url 'fornecedores:editar_fornecedor' fornecedor.pk %}" class="btn btn-primary" type="button">Editar</a>
                     <a href="{% url 'fornecedores:detalhes_fornecedor' fornecedor.id_fornecedor %}" class="btn btn-primary" role="button">Detalhes</a>
                     <a href="{% url 'produtos:novo_produto' fornecedor.pk %}" class="btn btn-success mt-2 mt-md-0" role="button">Adicionar Produto</a>
                     <button class="btn btn-danger mt-2 mt-md-0" type="button">Excluir</button>

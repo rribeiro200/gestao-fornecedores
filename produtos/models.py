@@ -18,3 +18,6 @@ class Produto(models.Model):
     data_validade = models.DateTimeField(null=True, blank=True)
     categoria_FK = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
     fornecedor_FK = models.ForeignKey(Fornecedor, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.nome

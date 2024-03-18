@@ -83,7 +83,7 @@
                         <p class="card-text"><strong>E-mail:</strong> {{ fornecedor.email }}</p>
                         <!-- Botões para ações relacionadas ao fornecedor -->
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary" type="button">Editar</button>
+                            <a href="{% url 'fornecedores:editar_fornecedor' fornecedor.pk %}" class="btn btn-primary" type="button">Editar</a>
                             <a href="{% url 'fornecedores:detalhes_fornecedor' fornecedor.id_fornecedor %}" class="btn btn-primary" role="button">Detalhes</a>
                             <button class="btn btn-danger mt-2" type="button">Excluir</button>
                         </div>

@@ -4,6 +4,7 @@ from .models import Fornecedor
 from produtos.models import Produto
 from .forms import FornecedorForm
 from django.contrib import messages
+from utils.valida_edicao_fornecedor import valida_edicao_fornecedor
 
 # Create your views here.
 def index(request):
@@ -51,3 +52,23 @@ def adicionar_fornecedor(request):
     ctx = {'form': form}
 
     return render(request, 'fornecedores/adicionar_fornecedor.html', ctx)
+
+
+def editar_fornecedor(request, pk):
+    fornecedor = Fornecedor.objects.filter(pk=pk).first()
+    produto_fornecedor = Produto.objects.filter(fornecedor_FK=pk)
+    tipos_fornecedor = Fornecedor.objects.values_list('tipo', flat=True).distinct()
+
+    if request.method == 'POST':
+        dados_para_edicao = request.POST
+        valida_edicao_fornecedor(fornecedor, dados_para_edicao)
+
+        return redirect('fornecedores:editar_fornecedor', pk=pk)
+
+    ctx = {
+        'fornecedor': fornecedor,
+        'produto_fornecedor': produto_fornecedor,
+        'tipos_fornecedor': tipos_fornecedor
+    }
+
+    return render(request, 'fornecedores/editar_fornecedor.html', ctx)
